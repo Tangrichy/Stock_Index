@@ -4,7 +4,7 @@
 
    
 
-   ![ZZ1000PB](.\Plot\ZZ1000PB.jpg)
+   ![ZZ1000PB](./Plot/ZZ1000PB.jpg)
 
    ![ZZ1000PE](.\Plot\ZZ1000PE.jpg)
 
