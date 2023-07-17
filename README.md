@@ -10,7 +10,7 @@
 
    ![ZZ1000PBPE](./Plot/ZZ1000PBPE.jpg)
 
-   ![ZZ1000risk](./Plot/ZZ1000risk.jpg)
+   ![ZZ1000risk](./Plot/ZZ1000Risk.jpg)
 
 2. 中证500
 
