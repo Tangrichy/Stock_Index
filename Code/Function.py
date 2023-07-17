@@ -67,3 +67,30 @@ def vis_plot(price_data, factor_data, title, index_name,y_axis,file_name, up_lin
     ax1.grid(True)
     ax1.legend(lines1 + lines2, labels1 +labels2, loc = "best")
     plt.savefig(file)
+
+def PBPE_risk_plot(data, upper_data, lower_data, index_name):
+
+    file = "./Plot/" + index_name + "evaluation" + ".jpg"
+
+
+    plt.figure(num = 1, figsize = (12,6))
+    plt.grid()
+    plt.plot(data.Date, data.Close , label = "Close")
+    plt.plot(upper_data.Date, upper_data.Close, "^",label = "High")
+    plt.plot(lower_data.Date, lower_data.Close, "^",label = "Lower")
+    leg = plt.legend(loc='best')
+    plt.title(index_name + " " + str("PBPE and Risk"))
+    plt.xlabel('Date')
+    plt.ylabel("Close")
+    plt.savefig(file)
+
+
+# PBPE, risk release sign
+
+def sign_evaluation(data, upper = 0.95, lower = 0.05):
+    if data["PBPE"] > upper or data["Risk"] >= upper:
+        return "High"
+    elif data["PBPE"] <= lower or data["Risk"] <= lower:
+        return "Low"
+    else:
+        return "Stable"
