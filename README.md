@@ -8,7 +8,7 @@
 
    ![ZZ1000PBPE](./Plot/ZZ1000PBPE.jpg)
 
-   ![ZZ1000risk](./Plot/ZZ1000risk.jpg)
+   ![ZZ1000risk](./Plot/ZZ1000Risk.jpg)
 
 2. 中证500
 
@@ -30,5 +30,5 @@
 
    ![HS300PBPE](./Plot/HS300PBPE.jpg)
 
-   ![HS300risk](./Plot/HS300risk.jpg)
+   ![HS300risk](./Plot/HS300Risk.jpg)
 
