@@ -34,6 +34,12 @@ ZZ500_data, ZZ500_price =  read_data(indexs="ZZ500")
 ZZ500_evaluation = evaluation_rank(data=ZZ500_data)
 ZZ500_evaluation_price = ZZ500_evaluation.merge(ZZ500_price)
 
+for i in ["PE", "PB", 'PBPE', "Risk"]:
+    vis_plot(price_data = ZZ500_evaluation_price[["Date", "Close"]], 
+              factor_data = ZZ500_evaluation_price[["Date", i]], 
+              title = i, index_name="ZZ500" ,y_axis = i, file_name=i)
+    plt.clf()
+
 ## Combine PBPE and Risk
 ZZ500_evaluation_price["Sign"] = ZZ500_evaluation_price.apply(sign_evaluation, axis = 1)
 ZZ500_upper = ZZ500_evaluation_price[ZZ500_evaluation_price["Sign"] == "High"]
