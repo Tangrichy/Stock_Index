@@ -2,7 +2,7 @@
 
 1. 中证1000
 
-   ![ZZ1000PB](./lot/ZZ1000PB.jpg)
+   ![ZZ1000PB](./Plot/ZZ1000PB.jpg)
 
    ![ZZ1000PE](./Plot/ZZ1000PE.jpg)
 
@@ -32,3 +32,10 @@
 
    ![HS300risk](./Plot/HS300Risk.jpg)
 
+4. PBPE, Reverrt
+
+   ![ZZ1000](./Plot/ZZ1000evaluation.jpg)
+
+   ![ZZ500](./Plot/ZZ500evaluation.jpg)
+
+   ![HS300](./Plot/HS300evaluation.jpg)
