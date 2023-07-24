@@ -94,3 +94,40 @@ def sign_evaluation(data, upper = 0.95, lower = 0.05):
         return "Low"
     else:
         return "Stable"
+    
+# crowding
+## prepare data
+def crowding_data(data):
+    output = data[["Date", "Close","volume", "turn", "High", "Low"]]
+    # log return
+    output["Close"] = np.log(output["Close"].pct_change() + 1)
+    return output
+
+## the power of upword
+
+def exp_fun(data, window_len = None, moving_window = 20):
+
+    if window_len == None:
+        end_date = data["Date"][0] + datetime.timedelta(days = 365*5)
+        window_len = len(data[data["Date"] <= end_date])
+    else:
+        window_len = window_len
+
+    output = data[["Date", "Close"]] # select data and Close price
+    # calucualte slop
+    output["exp_fun"] = output["Close"].rolling(moving_window).sum()
+    # rank
+    output["exp_rank"] = output["exp_fun"].rolling(window_len).rank(pct = True)
+    output = output.dropna()
+    return output
+
+def skew_kur(data, window_len = None, moving_window = 20):
+    # initial window
+    if window_len == None:
+        end_date = data["Date"][0] + datetime.timedelta(days = 365*5)
+        window_len = len(data[data["Date"] <= end_date])
+    else:
+        window_len = window_len
+
+    output = data[["Date", "Close"]]
+    return output

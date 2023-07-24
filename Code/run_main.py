@@ -77,15 +77,3 @@ PBPE_risk_plot(data = HS_evaluation_price, upper_data = HS_upper, lower_data = H
 
 ## log return
 ZZ_data
-
-class crowding:
-    def __init__(self, data):
-        self.data = data
-    def select_data(self):
-        output = self.data[["Close", "volume", "amt"]]
-        self.select_data = output
-        return self.self.select_data
-    def price_pct(self):
-        log_return = self.select_data[["Close"]].pct_change()
-        self.price_pct = log_return
-        return self.price_pct
