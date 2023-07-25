@@ -98,11 +98,12 @@ def sign_evaluation(data, upper = 0.95, lower = 0.05):
 # crowding
 ## prepare data
 def crowding_data(data):
-    output = data[["Date", "Close","volume", "turn", "High", "Low"]]
+    output = data[["Date", "Close","volume", "turn", "amt","High", "Low"]]
     # log return
     output["Close"] = np.log(output["Close"].pct_change() + 1)
-    return output
+    return output.dropna()
 
+## exp_rank skew close_tur_corr kur Hinden
 ## the power of upword
 
 def exp_fun(data, window_len = None, moving_window = 20):
@@ -120,8 +121,25 @@ def exp_fun(data, window_len = None, moving_window = 20):
     output["exp_rank"] = output["exp_fun"].rolling(window_len).rank(pct = True)
     output = output.dropna()
     return output
+## var
 
-def skew_kur(data, window_len = None, moving_window = 20):
+def ret_std(data, window_len = None, moving_window = 20):
+    std = np.std
+    if window_len == None:
+        end_date = data["Date"][0] + datetime.timedelta(days = 365*5)
+        window_len = len(data[data["Date"] <= end_date])
+    else:
+        window_len = window_len
+
+    output = data[["Date", "Close"]]
+    output["ret_std"] = output["Close"].rolling(moving_window).std(ddof=1)
+    output["std_rank"] = output["ret_std"].rolling(window_len).rank(pct = True)
+    output = output.dropna()
+    output = output[["Date","ret_var"]]
+    return output
+
+## skew and kurt
+def ret_skew(data, window_len = None, moving_window = 20):
     # initial window
     if window_len == None:
         end_date = data["Date"][0] + datetime.timedelta(days = 365*5)
@@ -130,4 +148,38 @@ def skew_kur(data, window_len = None, moving_window = 20):
         window_len = window_len
 
     output = data[["Date", "Close"]]
+    output["skew"] = output["Close"].rolling(moving_window).skew()
+    output["skew_rank"] = output["ret_skew"].rolling(window_len).rank(pct = True)
+    output = output.dropna()
+    output = output[["Date", "skew"]]
     return output
+
+def ret_kurt(data, window_len = None, moving_window = 20):
+    # initial window
+    if window_len == None:
+        end_date = data["Date"][0] + datetime.timedelta(days = 365*5)
+        window_len = len(data[data["Date"] <= end_date])
+    else:
+        window_len = window_len
+
+    output = data[["Date", "Close"]]
+    output["kur"] = output["Close"].rolling(moving_window).kurt()
+    output["kur_rank"] = output["kur"].rolling(window_len).rank(pct = True)
+    output = output.dropna()
+    output = output[["Date", "kur"]]
+    return output
+
+## bais
+
+def bais(ddata, window_len = None, moving_window = 20):
+    # initial window
+    if window_len == None:
+        end_date = data["Date"][0] + datetime.timedelta(days = 365*5)
+        window_len = len(data[data["Date"] <= end_date])
+    else:
+        window_len = window_len
+
+    output = data[["Close", "volume", "amt", "turn"]]
+    output = output.set_index("Date")
+    corr_matrix = output.rolling(moving_window).corr()
+    return corr_matrix
