@@ -55,8 +55,8 @@ def vis_plot(price_data, factor_data, title, index_name,y_axis,file_name, up_lin
     fig, ax1 = plt.subplots(num = 1, figsize = (12,6))
     ax1.plot(factor_data.Date, factor_data.iloc[:,1], color = 'blue', label = factor_data.iloc[:,1].name)
     ax1.set_ylabel(y_axis)
-    ax1.axhline(y = up_line, color = "red", alpha = 0.8,label = "0.95")
-    ax1.axhline(y = lower_line, color = "red", alpha = 0.8,label = "0.05")
+    ax1.axhline(y = up_line, color = "red", alpha = 0.8,label = "0.9")
+    ax1.axhline(y = lower_line, color = "red", alpha = 0.8,label = "0.1")
     ax2 = ax1.twinx()
     ax2.plot(price_data.Date, price_data.iloc[:,1], color = 'orange', label = "Close")
     ax2.set_ylabel("Close")
@@ -87,7 +87,7 @@ def PBPE_risk_plot(data, upper_data, lower_data, index_name):
 
 # PBPE, risk release sign
 
-def sign_evaluation(data, upper = 0.95, lower = 0.05):
+def sign_evaluation(data, upper = 0.95, lower = 0.1):
     if data["PBPE"] > upper or data["Risk"] >= upper:
         return "High"
     elif data["PBPE"] <= lower or data["Risk"] <= lower:
