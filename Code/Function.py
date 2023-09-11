@@ -65,7 +65,7 @@ def vis_plot(price_data, factor_data, title, index_name,y_axis,file_name, up_lin
     lines1, labels1 = ax1.get_legend_handles_labels()
     lines2, labels2 = ax2.get_legend_handles_labels()
     ax1.grid(True)
-    ax1.legend(lines1 + lines2, labels1 +labels2, loc = "best")
+    ax1.legend(lines1 + lines2, labels1 +labels2, loc = "upper right")
     plt.savefig(file)
 
 def PBPE_risk_plot(data, upper_data, lower_data, index_name):
@@ -78,7 +78,7 @@ def PBPE_risk_plot(data, upper_data, lower_data, index_name):
     plt.plot(data.Date, data.Close , label = "Close")
     plt.plot(upper_data.Date, upper_data.Close, "^",label = "High")
     plt.plot(lower_data.Date, lower_data.Close, "^",label = "Lower")
-    leg = plt.legend(loc='best')
+    leg = plt.legend(loc="upper right")
     plt.title(index_name + " " + str("PBPE and Risk"))
     plt.xlabel('Date')
     plt.ylabel("Close")
